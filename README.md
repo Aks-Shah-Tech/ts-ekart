@@ -11,3 +11,7 @@
     3.2 create products array
     3.3 add product images
     3.4 render products
+4. Add React Bootstrap
+    4.1 npm install react-bootstrap bootstrap
+    4.2 import bootstrap css
+    4.3 update App.tsx
