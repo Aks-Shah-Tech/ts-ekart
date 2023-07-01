@@ -15,3 +15,4 @@
     4.1 npm install react-bootstrap bootstrap
     4.2 import bootstrap css
     4.3 update App.tsx
+5. Add react-router-dom for routing
