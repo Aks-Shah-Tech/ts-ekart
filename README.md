@@ -16,3 +16,4 @@
     4.2 import bootstrap css
     4.3 update App.tsx
 5. Add react-router-dom for routing
+6. Add React-Query to fetch data from backend
