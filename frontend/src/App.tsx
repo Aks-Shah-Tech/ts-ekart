@@ -18,7 +18,7 @@ import { LinkContainer } from "react-router-bootstrap";
 
 function App() {
   const {
-    state: { mode, cart },
+    state: { mode, cart, userInfo },
     dispatch,
   } = useContext(Store);
 
@@ -29,6 +29,16 @@ function App() {
   const switchModeHandler = () => {
     dispatch({ type: "SWITCH_MODE" });
   };
+
+  const signoutHandler = () => {
+    dispatch({ type: "USER_SIGNOUT" });
+    localStorage.removeItem("userInfo");
+    localStorage.removeItem("cartItems");
+    localStorage.removeItem("shippingAddress");
+    localStorage.removeItem("paymentMethod");
+    window.location.href = "/signin";
+  };
+
   return (
     // <div className="d-flex flex-column vh-100">
     //   <header>
@@ -85,7 +95,21 @@ function App() {
                     )}
                   </Nav.Link>
                 </LinkContainer>
-                <Nav.Link href="#action2">Sign In</Nav.Link>
+                {userInfo ? (
+                  <NavDropdown title={userInfo.name} id="basic-nav-dropdown">
+                    <Link
+                      className="dropdown-item"
+                      to="#signout"
+                      onClick={signoutHandler}
+                    >
+                      Sign Out
+                    </Link>
+                  </NavDropdown>
+                ) : (
+                  <Link className="nav-link" to="/signin">
+                    Sign In
+                  </Link>
+                )}
               </Nav>
             </Navbar.Collapse>
           </Container>
