@@ -14,6 +14,7 @@ const SignupPage = () => {
   const { search } = useLocation()
   const redirectInUrl = new URLSearchParams(search).get('redirect')
   const redirect = redirectInUrl ? redirectInUrl : '/'
+  
 
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
