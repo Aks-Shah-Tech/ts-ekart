@@ -1,6 +1,6 @@
 import React from "react";
 import { Cart, CartItem, ShippingAddress } from "./types/Cart";
-import { UserInfo } from "./types/UserInfo";
+import { UserInfo } from "./types/User";
 
 type AppState = {
   mode: string;
@@ -42,12 +42,13 @@ type Action =
   | { type: "USER_SIGNIN"; payload: UserInfo }
   | { type: "USER_SIGNOUT" }
   | { type: "SAVE_SHIPPING_ADDRESS"; payload: ShippingAddress }
-  | { type: 'SAVE_PAYMENT_METHOD'; payload: string }
+  | { type: "SAVE_PAYMENT_METHOD"; payload: string }
+  | { type: "CART_CLEAR" };
 
 function reducer(state: AppState, action: Action): AppState {
   switch (action.type) {
     case "SWITCH_MODE":
-      localStorage.setItem('mode', state.mode === 'dark' ? 'light' : 'dark')
+      localStorage.setItem("mode", state.mode === "dark" ? "light" : "dark");
       return { ...state, mode: state.mode === "dark" ? "light" : "dark" };
     case "CART_ADD_ITEM":
       // eslint-disable-next-line no-case-declarations
@@ -98,22 +99,24 @@ function reducer(state: AppState, action: Action): AppState {
           totalPrice: 0,
         },
       };
-    case 'SAVE_SHIPPING_ADDRESS':
+    case "SAVE_SHIPPING_ADDRESS":
       return {
         ...state,
         cart: {
           ...state.cart,
           shippingAddress: action.payload,
         },
-      }
-    case 'SAVE_PAYMENT_METHOD':
+      };
+    case "SAVE_PAYMENT_METHOD":
       return {
         ...state,
         cart: {
           ...state.cart,
           paymentMethod: action.payload,
         },
-      }
+      };
+    case "CART_CLEAR":
+      return { ...state, cart: { ...state.cart, cartItems: [] } };
     default:
       return state;
   }
