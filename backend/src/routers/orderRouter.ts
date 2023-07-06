@@ -5,6 +5,20 @@ import { Product } from "../models/productModel";
 import { isAuth } from "../utils";
 export const orderRouter = express.Router();
 
+orderRouter.get(
+  // /api/orders/:id
+  "/:id",
+  isAuth,
+  asyncHandler(async (req: Request, res: Response) => {
+    const order = await OrderModel.findById(req.params.id);
+    if (order) {
+      res.json(order);
+    } else {
+      res.status(404).json({ message: "Order not found" });
+    }
+  })
+);
+
 orderRouter.post(
   "/",
   isAuth,
@@ -25,7 +39,7 @@ orderRouter.post(
         totalPrice: req.body.totalPrice,
         user: req.user._id,
       });
-      res.status(201).json({ message: "Order Created", order: createdOrder })
+      res.status(201).json({ message: "Order Created", order: createdOrder });
     }
   })
 );
