@@ -27,7 +27,7 @@ const ProductItem = ({product}: {product:Product}) => {
     toast.success('Product added to the cart')
   }
   return (
-    <Card>
+    <Card className="shadow border-0">
         <Link to={`/product/${product.slug}`}>
         <img
              src={product.image}
